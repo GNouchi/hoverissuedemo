@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <title>Issue with the hover function</title>
+        <script>
+        $(document).ready(function(){
+
+// this is the version that works
+              //   var blog1 = "";
+              // $('img').hover(function() {
+              //     blog1 = $(this).attr('src');
+              //      $(this).attr("src","https://www.scarymommy.com/wp-content/uploads/2018/01/target-dog2.jpg?w=550");
+              //    }, function() {
+              //         $(this).attr("src",blog1);
+              // });
+// Explicit declaration seems to work
+                // var saddog = "https://i.imgur.com/Eybamm4.jpg";
+                // var happydog="https://www.scarymommy.com/wp-content/uploads/2018/01/target-dog2.jpg?w=550";
+                //  $('img').hover(function() {
+                //      $(this).attr("src",happydog);
+                //  }, function() {
+                //      $(this).attr("src",saddog);
+                // });
+// Why does THIS throw Uncaught ReferenceError? || Is this due to a race condition? Maybe var is out of scope???
+            $('img').hover(function() {
+                var blog1 = $(this).attr('src');
+                 $(this).attr("src","https://www.scarymommy.com/wp-content/uploads/2018/01/target-dog2.jpg?w=550");
+               }, function() {
+                    $(this).attr("src",blog1);
+            });
+// possibly something to do with .hover() being defined as mouseenter() and mouseleave()? SEE demo at bottom https://api.jquery.com/mouseover/
+
+        });
+        </script>
+        <style >
+            div{
+                height: 250px;
+                width: 650px;;
+                background:url("ErrorSS.png");
+            }
+        </style>
+    </head>
+    <body>
+        <img src="https://i.imgur.com/Eybamm4.jpg" alt="test">
+        <div background:url("ErrorSS.png") alt="test"> </div>
+        </body>
+</html>
